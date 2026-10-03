@@ -505,7 +505,11 @@ footer{
         opacity:0;
         transform:translateY(0) scale(.7);
     }
-    15%{opacity:.7}
+
+    15%{
+        opacity:.7;
+    }
+
     100%{
         opacity:0;
         transform:translateY(-105vh) translateX(var(--x)) scale(1.1);
@@ -517,6 +521,7 @@ footer{
         opacity:0;
         transform:translateY(18px);
     }
+
     to{
         opacity:1;
         transform:translateY(0);
@@ -548,6 +553,14 @@ footer{
     <div class="glow two"></div>
     <div class="grain"></div>
 </div>
+
+<!-- BACKGROUND MUSIC -->
+<audio
+    id="bgMusic"
+    src="music.mp3"
+    loop
+    preload="auto"
+></audio>
 
 <!-- INTRO -->
 
@@ -936,23 +949,129 @@ const CONFIG = {
    ELEMENTS
 ========================================================= */
 
-const intro = document.getElementById("intro");
-const introTitle = document.getElementById("introTitle");
-const main = document.getElementById("main");
+const intro =
+    document.getElementById("intro");
 
-const timeOptions = document.getElementById("timeOptions");
-const foodOptions = document.getElementById("foodOptions");
-const drinkOptions = document.getElementById("drinkOptions");
+const introTitle =
+    document.getElementById("introTitle");
 
-const dateChoice = document.getElementById("dateChoice");
+const main =
+    document.getElementById("main");
 
-const confirmBtn = document.getElementById("confirmBtn");
-const finalCard = document.getElementById("finalCard");
+const bgMusic =
+    document.getElementById("bgMusic");
 
-const summaryDate = document.getElementById("summaryDate");
-const summaryTime = document.getElementById("summaryTime");
-const summaryFood = document.getElementById("summaryFood");
-const summaryDrink = document.getElementById("summaryDrink");
+const timeOptions =
+    document.getElementById("timeOptions");
+
+const foodOptions =
+    document.getElementById("foodOptions");
+
+const drinkOptions =
+    document.getElementById("drinkOptions");
+
+const dateChoice =
+    document.getElementById("dateChoice");
+
+const confirmBtn =
+    document.getElementById("confirmBtn");
+
+const finalCard =
+    document.getElementById("finalCard");
+
+const summaryDate =
+    document.getElementById("summaryDate");
+
+const summaryTime =
+    document.getElementById("summaryTime");
+
+const summaryFood =
+    document.getElementById("summaryFood");
+
+const summaryDrink =
+    document.getElementById("summaryDrink");
+
+
+/* =========================================================
+   MUSIC
+========================================================= */
+
+bgMusic.volume = 0.75;
+
+let musicStarted = false;
+
+function startMusic(){
+
+    if(musicStarted){
+        return;
+    }
+
+    const playPromise = bgMusic.play();
+
+    if(playPromise !== undefined){
+
+        playPromise
+            .then(() => {
+
+                musicStarted = true;
+
+            })
+            .catch(() => {
+
+                /*
+                    ზოგიერთი ბრაუზერი ხმის მქონე
+                    autoplay-ს ბლოკავს.
+                    ასეთ შემთხვევაში პირველი
+                    შეხებისას ხელახლა ვცდით.
+                */
+
+            });
+
+    }
+
+}
+
+
+/*
+    გვერდის ჩატვირთვისთანავე
+    ვცდილობთ მუსიკის ჩართვას.
+*/
+
+window.addEventListener("load", () => {
+
+    startMusic();
+
+});
+
+
+/*
+    თუ autoplay დაიბლოკა,
+    პირველი შეხება/დაჭერა ჩართავს მუსიკას.
+*/
+
+function unlockMusic(){
+
+    startMusic();
+
+}
+
+document.addEventListener(
+    "pointerdown",
+    unlockMusic,
+    { once:false, passive:true }
+);
+
+document.addEventListener(
+    "touchstart",
+    unlockMusic,
+    { once:false, passive:true }
+);
+
+document.addEventListener(
+    "click",
+    unlockMusic,
+    { once:false }
+);
 
 
 /* =========================================================
@@ -970,7 +1089,10 @@ let introIndex = 0;
 function showIntro(){
 
     introTitle.style.opacity = "0";
-    introTitle.style.transform = "translateY(15px)";
+
+    introTitle.style.transform =
+        "translateY(15px)";
+
 
     setTimeout(() => {
 
@@ -978,36 +1100,53 @@ function showIntro(){
             introLines[introIndex];
 
         introTitle.style.opacity = "1";
-        introTitle.style.transform = "translateY(0)";
+
+        introTitle.style.transform =
+            "translateY(0)";
 
     },400);
 
+
     introIndex++;
+
 
     if(introIndex < introLines.length){
 
-        setTimeout(showIntro,2200);
+        setTimeout(
+            showIntro,
+            2200
+        );
 
     }else{
 
         setTimeout(() => {
 
             intro.classList.add("hide");
+
             main.classList.add("visible");
 
         },2500);
 
     }
+
 }
 
-setTimeout(showIntro,700);
+
+setTimeout(
+    showIntro,
+    700
+);
 
 
 /* =========================================================
    OPTION BUILDER
 ========================================================= */
 
-function createOptions(container, items, name){
+function createOptions(
+    container,
+    items,
+    name
+){
 
     items.forEach((item,index) => {
 
@@ -1017,7 +1156,8 @@ function createOptions(container, items, name){
         const wrapper =
             document.createElement("div");
 
-        wrapper.className = "option";
+        wrapper.className =
+            "option";
 
         wrapper.innerHTML = `
 
@@ -1042,7 +1182,9 @@ function createOptions(container, items, name){
 
         `;
 
-        container.appendChild(wrapper);
+        container.appendChild(
+            wrapper
+        );
 
     });
 
@@ -1056,17 +1198,19 @@ function createOptions(container, items, name){
 createOptions(
     timeOptions,
     CONFIG.times.map(time => ({
-        name:time,
-        detail:""
+        name: time,
+        detail: ""
     })),
     "time"
 );
+
 
 createOptions(
     foodOptions,
     CONFIG.foods,
     "food"
 );
+
 
 createOptions(
     drinkOptions,
@@ -1087,7 +1231,9 @@ tomorrow.setDate(
 );
 
 dateChoice.min =
-    tomorrow.toISOString().split("T")[0];
+    tomorrow
+        .toISOString()
+        .split("T")[0];
 
 
 /* =========================================================
@@ -1114,13 +1260,18 @@ function getSelected(name){
 function formatDate(date){
 
     if(!date){
+
         return "არ არის არჩეული";
+
     }
 
     const d =
-        new Date(date + "T00:00:00");
+        new Date(
+            date + "T00:00:00"
+        );
 
     const months = [
+
         "იანვარი",
         "თებერვალი",
         "მარტი",
@@ -1133,6 +1284,7 @@ function formatDate(date){
         "ოქტომბერი",
         "ნოემბერი",
         "დეკემბერი"
+
     ];
 
     return `
@@ -1140,6 +1292,7 @@ function formatDate(date){
         ${months[d.getMonth()]}
         ${d.getFullYear()}
     `;
+
 }
 
 
@@ -1147,88 +1300,111 @@ function formatDate(date){
    CONFIRM
 ========================================================= */
 
-confirmBtn.addEventListener("click", () => {
+confirmBtn.addEventListener(
+    "click",
+    () => {
 
-    const date =
-        dateChoice.value;
+        const date =
+            dateChoice.value;
 
-    const time =
-        getSelected("time");
+        const time =
+            getSelected("time");
 
-    const food =
-        getSelected("food");
+        const food =
+            getSelected("food");
 
-    const drink =
-        getSelected("drink");
+        const drink =
+            getSelected("drink");
 
 
-    if(!date){
+        if(!date){
 
-        alert("ჯერ თარიღი აირჩიე ♡");
-        return;
+            alert(
+                "ჯერ თარიღი აირჩიე ♡"
+            );
+
+            return;
+
+        }
+
+
+        if(!time){
+
+            alert(
+                "ჯერ დრო აირჩიე ♡"
+            );
+
+            return;
+
+        }
+
+
+        if(!food){
+
+            alert(
+                "ჯერ საჭმელი აირჩიე ♡"
+            );
+
+            return;
+
+        }
+
+
+        if(!drink){
+
+            alert(
+                "ჯერ სასმელი აირჩიე ♡"
+            );
+
+            return;
+
+        }
+
+
+        summaryDate.textContent =
+            formatDate(date);
+
+        summaryTime.textContent =
+            time;
+
+        summaryFood.textContent =
+            food;
+
+        summaryDrink.textContent =
+            drink;
+
+
+        finalCard.classList.add(
+            "show"
+        );
+
+
+        confirmBtn.textContent =
+            "დადასტურებულია ♡";
+
+
+        confirmBtn.disabled =
+            true;
+
+
+        confirmBtn.style.opacity =
+            ".65";
+
+
+        createHeartBurst();
+
+
+        setTimeout(() => {
+
+            finalCard.scrollIntoView({
+                behavior:"smooth",
+                block:"center"
+            });
+
+        },300);
 
     }
-
-    if(!time){
-
-        alert("ჯერ დრო აირჩიე ♡");
-        return;
-
-    }
-
-    if(!food){
-
-        alert("ჯერ საჭმელი აირჩიე ♡");
-        return;
-
-    }
-
-    if(!drink){
-
-        alert("ჯერ სასმელი აირჩიე ♡");
-        return;
-
-    }
-
-
-    summaryDate.textContent =
-        formatDate(date);
-
-    summaryTime.textContent =
-        time;
-
-    summaryFood.textContent =
-        food;
-
-    summaryDrink.textContent =
-        drink;
-
-
-    finalCard.classList.add("show");
-
-    confirmBtn.textContent =
-        "დადასტურებულია ♡";
-
-    confirmBtn.disabled =
-        true;
-
-    confirmBtn.style.opacity =
-        ".65";
-
-
-    createHeartBurst();
-
-
-    setTimeout(() => {
-
-        finalCard.scrollIntoView({
-            behavior:"smooth",
-            block:"center"
-        });
-
-    },300);
-
-});
+);
 
 
 /* =========================================================
@@ -1257,18 +1433,26 @@ function createHeart(){
     heart.style.animationDuration =
         (4 + Math.random()*3) + "s";
 
-    document.body.appendChild(heart);
+    document.body.appendChild(
+        heart
+    );
+
 
     setTimeout(() => {
+
         heart.remove();
+
     },7000);
 
 }
 
+
 setInterval(() => {
 
     if(Math.random() > .35){
+
         createHeart();
+
     }
 
 },2500);
@@ -1280,7 +1464,11 @@ setInterval(() => {
 
 function createHeartBurst(){
 
-    for(let i=0;i<18;i++){
+    for(
+        let i=0;
+        i<18;
+        i++
+    ){
 
         setTimeout(() => {
 
@@ -1307,10 +1495,15 @@ function createHeartBurst(){
             heart.style.animationDuration =
                 (2.5 + Math.random()*2) + "s";
 
-            document.body.appendChild(heart);
+            document.body.appendChild(
+                heart
+            );
+
 
             setTimeout(() => {
+
                 heart.remove();
+
             },5000);
 
         },i*70);
@@ -1328,6 +1521,7 @@ const reveal =
     document.querySelectorAll(
         ".message,.choice-title,.choice-group,.confirm-title"
     );
+
 
 const observer =
     new IntersectionObserver(
@@ -1354,8 +1548,11 @@ const observer =
         }
     );
 
+
 reveal.forEach(el => {
+
     observer.observe(el);
+
 });
 
 </script>
