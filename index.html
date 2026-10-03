@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<meta name="theme-color" content="#090708">
+<title>ერთი პატარა მოწვევა ♡</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Georgian:wght@400;500;600;700&family=Noto+Sans+Georgian:wght@300;400;500;600&display=swap');
+
+:root{
+    --bg:#090708;
+    --bg2:#110b0e;
+    --wine:#551b2c;
+    --wine2:#722a3d;
+    --cream:#f5eee8;
+    --muted:#a99da0;
+    --gold:#c7a77b;
+    --line:rgba(245,238,232,.13);
+    --card:#100b0d;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html{
+    scroll-behavior:smooth;
+    background:var(--bg);
+}
+
+body{
+    min-height:100vh;
+    overflow-x:hidden;
+    background:
+        radial-gradient(circle at 50% 10%,rgba(109,37,56,.20),transparent 32%),
+        radial-gradient(circle at 0% 90%,rgba(199,167,123,.06),transparent 30%),
+        var(--bg);
+    color:var(--cream);
+    font-family:"Noto Sans Georgian",sans-serif;
+}
+
+button{
+    font-family:inherit;
+}
+
+.background{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:0;
+}
+
+.glow{
+    position:absolute;
+    width:450px;
+    height:450px;
+    border-radius:50%;
+    background:radial-gradient(circle,rgba(109,37,56,.14),transparent 70%);
+}
+
+.glow.one{
+    left:-200px;
+    top:-220px;
+}
+
+.glow.two{
+    right:-200px;
+    bottom:-220px;
+}
+
+.grain{
+    position:absolute;
+    inset:0;
+    opacity:.025;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* INTRO */
+
+.intro{
+    position:fixed;
+    inset:0;
+    z-index:100;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#090708;
+    transition:opacity 1s ease,visibility 1s ease;
+}
+
+.intro.hide{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+}
+
+.intro-content{
+    width:90%;
+    max-width:500px;
+    text-align:center;
+}
+
+.intro-small{
+    font-size:10px;
+    letter-spacing:5px;
+    color:var(--gold);
+    margin-bottom:25px;
+}
+
+.intro-title{
+    min-height:90px;
+    font-family:"Noto Serif Georgian",serif;
+    font-size:clamp(28px,8vw,45px);
+    line-height:1.5;
+    transition:.8s;
+}
+
+.intro-line{
+    width:45px;
+    height:1px;
+    background:var(--gold);
+    margin:28px auto;
+}
+
+/* MAIN */
+
+main{
+    position:relative;
+    z-index:1;
+    opacity:0;
+    transition:opacity 1.4s ease;
+}
+
+main.visible{
+    opacity:1;
+}
+
+section{
+    min-height:100vh;
+    width:100%;
+    padding:80px 22px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.container{
+    width:min(100%,520px);
+}
+
+/* HERO */
+
+.hero{
+    min-height:100svh;
+    text-align:center;
+    position:relative;
+}
+
+.eyebrow{
+    font-size:10px;
+    letter-spacing:5px;
+    color:var(--gold);
+    margin-bottom:28px;
+}
+
+.hero h1{
+    font-family:"Noto Serif Georgian",serif;
+    font-weight:500;
+    font-size:clamp(38px,11vw,65px);
+    line-height:1.3;
+}
+
+.hero h1 span{
+    display:block;
+    color:var(--gold);
+    font-size:.6em;
+    margin-top:8px;
+}
+
+.hero-description{
+    max-width:400px;
+    margin:30px auto;
+    color:var(--muted);
+    font-size:14px;
+    line-height:2;
+}
+
+.scroll-hint{
+    position:absolute;
+    bottom:30px;
+    left:50%;
+    transform:translateX(-50%);
+    color:#82777a;
+    font-size:9px;
+    letter-spacing:3px;
+}
+
+.scroll-line{
+    width:1px;
+    height:40px;
+    margin:12px auto;
+    background:linear-gradient(var(--gold),transparent);
+}
+
+/* INTRO TEXT */
+
+.message-section{
+    min-height:75vh;
+    text-align:center;
+}
+
+.message{
+    text-align:center;
+}
+
+.quote{
+    font-family:Georgia,serif;
+    font-size:55px;
+    color:var(--gold);
+}
+
+.message h2{
+    font-family:"Noto Serif Georgian",serif;
+    font-size:28px;
+    line-height:1.7;
+    font-weight:500;
+    margin:20px 0;
+}
+
+.message p{
+    color:var(--muted);
+    line-height:2;
+    font-size:14px;
+}
+
+.divider{
+    width:50px;
+    height:1px;
+    background:var(--gold);
+    margin:30px auto;
+}
+
+/* CHOOSER */
+
+.choice-section{
+    min-height:auto;
+    padding-top:70px;
+    padding-bottom:80px;
+}
+
+.choice-title{
+    text-align:center;
+    margin-bottom:42px;
+}
+
+.choice-title .eyebrow{
+    margin-bottom:20px;
+}
+
+.choice-title h2{
+    font-family:"Noto Serif Georgian",serif;
+    font-size:30px;
+    font-weight:500;
+    line-height:1.6;
+}
+
+.choice-title p{
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.8;
+    margin-top:15px;
+}
+
+.choice-group{
+    margin-bottom:40px;
+}
+
+.choice-label{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:15px;
+    color:var(--cream);
+    font-size:14px;
+}
+
+.choice-number{
+    width:27px;
+    height:27px;
+    border:1px solid rgba(199,167,123,.4);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--gold);
+    font-size:11px;
+}
+
+.options{
+    display:grid;
+    gap:10px;
+}
+
+.option{
+    position:relative;
+}
+
+.option input{
+    position:absolute;
+    opacity:0;
+    pointer-events:none;
+}
+
+.option label{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    min-height:58px;
+    padding:15px 18px;
+    border:1px solid var(--line);
+    background:rgba(255,255,255,.015);
+    color:#c6bbbd;
+    font-size:13px;
+    cursor:pointer;
+    transition:.3s ease;
+}
+
+.option label span{
+    color:#776d70;
+    font-size:11px;
+}
+
+.option input:checked + label{
+    border-color:var(--gold);
+    background:rgba(199,167,123,.08);
+    color:var(--cream);
+}
+
+.option input:checked + label span{
+    color:var(--gold);
+}
+
+/* CUSTOM DATE */
+
+.date-box{
+    border:1px solid var(--line);
+    background:rgba(255,255,255,.015);
+    padding:15px;
+}
+
+.date-box input{
+    width:100%;
+    border:0;
+    outline:0;
+    background:transparent;
+    color:var(--cream);
+    font-family:inherit;
+    font-size:14px;
+    color-scheme:dark;
+}
+
+/* CONFIRM */
+
+.confirm-section{
+    min-height:100vh;
+    text-align:center;
+}
+
+.confirm-title h2{
+    font-family:"Noto Serif Georgian",serif;
+    font-size:32px;
+    line-height:1.6;
+    font-weight:500;
+}
+
+.confirm-title p{
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.9;
+    margin:20px auto 35px;
+}
+
+.confirm-btn{
+    width:min(100%,350px);
+    min-height:57px;
+    border:0;
+    background:var(--cream);
+    color:#160f12;
+    cursor:pointer;
+    font-size:13px;
+    transition:.35s ease;
+}
+
+.confirm-btn:hover{
+    transform:translateY(-2px);
+    background:white;
+}
+
+/* FINAL CARD */
+
+.final-card{
+    display:none;
+    margin-top:35px;
+    border:1px solid var(--line);
+    padding:30px 22px;
+    text-align:left;
+    background:rgba(255,255,255,.018);
+}
+
+.final-card.show{
+    display:block;
+    animation:fadeUp .8s ease both;
+}
+
+.final-top{
+    text-align:center;
+    color:var(--gold);
+    font-size:10px;
+    letter-spacing:4px;
+    margin-bottom:30px;
+}
+
+.summary{
+    display:grid;
+    gap:1px;
+    background:var(--line);
+}
+
+.summary-item{
+    background:var(--card);
+    padding:18px;
+}
+
+.summary-label{
+    color:#756a6d;
+    font-size:9px;
+    letter-spacing:2px;
+    margin-bottom:7px;
+}
+
+.summary-value{
+    font-family:"Noto Serif Georgian",serif;
+    color:var(--cream);
+    font-size:15px;
+}
+
+.final-message{
+    text-align:center;
+    margin-top:30px;
+    color:#aaa0a2;
+    font-size:13px;
+    line-height:2;
+}
+
+/* FOOTER */
+
+footer{
+    text-align:center;
+    border-top:1px solid rgba(255,255,255,.05);
+    padding:35px 20px 45px;
+}
+
+.footer-brand{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    color:#817579;
+    font-size:10px;
+    letter-spacing:2px;
+}
+
+.footer-logo{
+    width:24px;
+    height:24px;
+    object-fit:contain;
+    opacity:.7;
+}
+
+.footer-note{
+    margin-top:10px;
+    color:#4f474a;
+    font-size:9px;
+}
+
+/* HEARTS */
+
+.heart{
+    position:fixed;
+    bottom:-30px;
+    color:var(--gold);
+    pointer-events:none;
+    z-index:20;
+    animation:floatHeart 5s linear forwards;
+}
+
+@keyframes floatHeart{
+    0%{
+        opacity:0;
+        transform:translateY(0) scale(.7);
+    }
+    15%{opacity:.7}
+    100%{
+        opacity:0;
+        transform:translateY(-105vh) translateX(var(--x)) scale(1.1);
+    }
+}
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(18px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@media(min-width:700px){
+
+    section{
+        padding-left:40px;
+        padding-right:40px;
+    }
+
+    .options{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .date-option{
+        grid-column:1/-1;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="background">
+    <div class="glow one"></div>
+    <div class="glow two"></div>
+    <div class="grain"></div>
+</div>
+
+<!-- INTRO -->
+
+<div class="intro" id="intro">
+
+    <div class="intro-content">
+
+        <div class="intro-small">
+            ერთი პატარა სიურპრიზი
+        </div>
+
+        <div class="intro-title" id="introTitle"></div>
+
+        <div class="intro-line"></div>
+
+    </div>
+
+</div>
+
+
+<main id="main">
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="container">
+
+        <div class="eyebrow">
+            SPECIAL INVITATION
+        </div>
+
+        <h1>
+            ერთი პატარა
+            <span>მოწვევა შენთვის</span>
+        </h1>
+
+        <p class="hero-description">
+            მინდა ერთი საღამო მხოლოდ ჩვენთვის იყოს.
+            მაგრამ ამჯერად არჩევანი შენზეა.
+        </p>
+
+    </div>
+
+    <div class="scroll-hint">
+        დაიწყე
+        <div class="scroll-line"></div>
+    </div>
+
+</section>
+
+
+<!-- MESSAGE -->
+
+<section class="message-section">
+
+    <div class="container">
+
+        <div class="message">
+
+            <div class="quote">“</div>
+
+            <h2>
+                მინდა ეს საღამო
+                შენ თვითონ დაგეგმო.
+            </h2>
+
+            <p>
+                აირჩიე დღე, დრო, საჭმელი და სასმელი.
+                მე კი დანარჩენზე ვიზრუნებ.
+            </p>
+
+            <div class="divider"></div>
+
+            <p>
+                ერთი პირობით —
+                ეს საღამო აუცილებლად უნდა იყოს
+                ჩვენთვის განსაკუთრებული.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CHOICES -->
+
+<section class="choice-section">
+
+    <div class="container">
+
+        <div class="choice-title">
+
+            <div class="eyebrow">
+                YOUR CHOICE
+            </div>
+
+            <h2>
+                მოდი, ერთად
+                ავაწყოთ ეს საღამო.
+            </h2>
+
+            <p>
+                თითოეულ კატეგორიაში აირჩიე ის,
+                რაც ყველაზე მეტად მოგწონს.
+            </p>
+
+        </div>
+
+
+        <!-- DATE -->
+
+        <div class="choice-group">
+
+            <div class="choice-label">
+                <div class="choice-number">01</div>
+                აირჩიე თარიღი
+            </div>
+
+            <div class="date-box">
+
+                <input
+                    type="date"
+                    id="dateChoice"
+                >
+
+            </div>
+
+        </div>
+
+
+        <!-- TIME -->
+
+        <div class="choice-group">
+
+            <div class="choice-label">
+                <div class="choice-number">02</div>
+                აირჩიე დრო
+            </div>
+
+            <div class="options" id="timeOptions"></div>
+
+        </div>
+
+
+        <!-- FOOD -->
+
+        <div class="choice-group">
+
+            <div class="choice-label">
+                <div class="choice-number">03</div>
+                რა გინდა ვჭამოთ?
+            </div>
+
+            <div class="options" id="foodOptions"></div>
+
+        </div>
+
+
+        <!-- DRINK -->
+
+        <div class="choice-group">
+
+            <div class="choice-label">
+                <div class="choice-number">04</div>
+                რას დავლევთ?
+            </div>
+
+            <div class="options" id="drinkOptions"></div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CONFIRM -->
+
+<section class="confirm-section">
+
+    <div class="container">
+
+        <div class="confirm-title">
+
+            <div class="eyebrow">
+                ALMOST THERE
+            </div>
+
+            <h2>
+                მზად ხარ?
+            </h2>
+
+            <p>
+                გადაამოწმე შენი არჩევანი
+                და დაადასტურე ჩვენი პატარა შეხვედრა.
+            </p>
+
+        </div>
+
+        <button class="confirm-btn" id="confirmBtn">
+            საღამოს დადასტურება ♡
+        </button>
+
+
+        <div class="final-card" id="finalCard">
+
+            <div class="final-top">
+                OUR EVENING
+            </div>
+
+            <div class="summary">
+
+                <div class="summary-item">
+
+                    <div class="summary-label">
+                        თარიღი
+                    </div>
+
+                    <div class="summary-value" id="summaryDate">
+                        —
+                    </div>
+
+                </div>
+
+
+                <div class="summary-item">
+
+                    <div class="summary-label">
+                        დრო
+                    </div>
+
+                    <div class="summary-value" id="summaryTime">
+                        —
+                    </div>
+
+                </div>
+
+
+                <div class="summary-item">
+
+                    <div class="summary-label">
+                        საჭმელი
+                    </div>
+
+                    <div class="summary-value" id="summaryFood">
+                        —
+                    </div>
+
+                </div>
+
+
+                <div class="summary-item">
+
+                    <div class="summary-label">
+                        სასმელი
+                    </div>
+
+                    <div class="summary-value" id="summaryDrink">
+                        —
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="final-message">
+
+                არჩევანი მიღებულია ♡<br><br>
+
+                ახლა მხოლოდ ერთი რამ დაგვრჩა —
+                დაველოდოთ იმ საღამოს.
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    <div class="footer-brand">
+
+        <img
+            src="logo.png"
+            class="footer-logo"
+            alt="DENI"
+        >
+
+        <span>
+            შექმნილია დენის მიერ
+        </span>
+
+    </div>
+
+    <div class="footer-note">
+        ერთი პატარა მოწვევა • მხოლოდ შენთვის
+    </div>
+
+</footer>
+
+</main>
+
+
+<script>
+
+/* =========================================================
+   CONFIG
+========================================================= */
+
+const CONFIG = {
+
+    name: "ნინი",
+
+    times: [
+        "18:00",
+        "19:00",
+        "20:00",
+        "21:00",
+        "22:00"
+    ],
+
+    foods: [
+        {
+            name: "პიცა",
+            detail: "🍕"
+        },
+        {
+            name: "ბურგერი",
+            detail: "🍔"
+        },
+        {
+            name: "სუში",
+            detail: "🍣"
+        },
+        {
+            name: "იტალიური",
+            detail: "🍝"
+        },
+        {
+            name: "ქართული",
+            detail: "🍽"
+        },
+        {
+            name: "შენ აირჩიე",
+            detail: "♡"
+        }
+    ],
+
+    drinks: [
+        {
+            name: "ლიმონათი",
+            detail: "სუფთა და ცივი"
+        },
+        {
+            name: "კოკა-კოლა",
+            detail: "კლასიკური"
+        },
+        {
+            name: "ყავა",
+            detail: "ცხელი"
+        },
+        {
+            name: "ჩაი",
+            detail: "თბილი"
+        },
+        {
+            name: "წვენი",
+            detail: "ახალი"
+        },
+        {
+            name: "შენ აირჩიე",
+            detail: "♡"
+        }
+    ]
+
+};
+
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const intro = document.getElementById("intro");
+const introTitle = document.getElementById("introTitle");
+const main = document.getElementById("main");
+
+const timeOptions = document.getElementById("timeOptions");
+const foodOptions = document.getElementById("foodOptions");
+const drinkOptions = document.getElementById("drinkOptions");
+
+const dateChoice = document.getElementById("dateChoice");
+
+const confirmBtn = document.getElementById("confirmBtn");
+const finalCard = document.getElementById("finalCard");
+
+const summaryDate = document.getElementById("summaryDate");
+const summaryTime = document.getElementById("summaryTime");
+const summaryFood = document.getElementById("summaryFood");
+const summaryDrink = document.getElementById("summaryDrink");
+
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+const introLines = [
+    "ჩემო საყვარელო...",
+    CONFIG.name + "...",
+    "ეს შენთვისაა."
+];
+
+let introIndex = 0;
+
+function showIntro(){
+
+    introTitle.style.opacity = "0";
+    introTitle.style.transform = "translateY(15px)";
+
+    setTimeout(() => {
+
+        introTitle.textContent =
+            introLines[introIndex];
+
+        introTitle.style.opacity = "1";
+        introTitle.style.transform = "translateY(0)";
+
+    },400);
+
+    introIndex++;
+
+    if(introIndex < introLines.length){
+
+        setTimeout(showIntro,2200);
+
+    }else{
+
+        setTimeout(() => {
+
+            intro.classList.add("hide");
+            main.classList.add("visible");
+
+        },2500);
+
+    }
+}
+
+setTimeout(showIntro,700);
+
+
+/* =========================================================
+   OPTION BUILDER
+========================================================= */
+
+function createOptions(container, items, name){
+
+    items.forEach((item,index) => {
+
+        const id =
+            name + "_" + index;
+
+        const wrapper =
+            document.createElement("div");
+
+        wrapper.className = "option";
+
+        wrapper.innerHTML = `
+
+            <input
+                type="radio"
+                name="${name}"
+                id="${id}"
+                value="${item.name}"
+            >
+
+            <label for="${id}">
+
+                <strong>
+                    ${item.name}
+                </strong>
+
+                <span>
+                    ${item.detail}
+                </span>
+
+            </label>
+
+        `;
+
+        container.appendChild(wrapper);
+
+    });
+
+}
+
+
+/* =========================================================
+   CREATE CHOICES
+========================================================= */
+
+createOptions(
+    timeOptions,
+    CONFIG.times.map(time => ({
+        name:time,
+        detail:""
+    })),
+    "time"
+);
+
+createOptions(
+    foodOptions,
+    CONFIG.foods,
+    "food"
+);
+
+createOptions(
+    drinkOptions,
+    CONFIG.drinks,
+    "drink"
+);
+
+
+/* =========================================================
+   DEFAULT DATE
+========================================================= */
+
+const tomorrow =
+    new Date();
+
+tomorrow.setDate(
+    tomorrow.getDate() + 1
+);
+
+dateChoice.min =
+    tomorrow.toISOString().split("T")[0];
+
+
+/* =========================================================
+   GET SELECTED
+========================================================= */
+
+function getSelected(name){
+
+    const selected =
+        document.querySelector(
+            `input[name="${name}"]:checked`
+        );
+
+    return selected
+        ? selected.value
+        : null;
+}
+
+
+/* =========================================================
+   FORMAT DATE
+========================================================= */
+
+function formatDate(date){
+
+    if(!date){
+        return "არ არის არჩეული";
+    }
+
+    const d =
+        new Date(date + "T00:00:00");
+
+    const months = [
+        "იანვარი",
+        "თებერვალი",
+        "მარტი",
+        "აპრილი",
+        "მაისი",
+        "ივნისი",
+        "ივლისი",
+        "აგვისტო",
+        "სექტემბერი",
+        "ოქტომბერი",
+        "ნოემბერი",
+        "დეკემბერი"
+    ];
+
+    return `
+        ${d.getDate()}
+        ${months[d.getMonth()]}
+        ${d.getFullYear()}
+    `;
+}
+
+
+/* =========================================================
+   CONFIRM
+========================================================= */
+
+confirmBtn.addEventListener("click", () => {
+
+    const date =
+        dateChoice.value;
+
+    const time =
+        getSelected("time");
+
+    const food =
+        getSelected("food");
+
+    const drink =
+        getSelected("drink");
+
+
+    if(!date){
+
+        alert("ჯერ თარიღი აირჩიე ♡");
+        return;
+
+    }
+
+    if(!time){
+
+        alert("ჯერ დრო აირჩიე ♡");
+        return;
+
+    }
+
+    if(!food){
+
+        alert("ჯერ საჭმელი აირჩიე ♡");
+        return;
+
+    }
+
+    if(!drink){
+
+        alert("ჯერ სასმელი აირჩიე ♡");
+        return;
+
+    }
+
+
+    summaryDate.textContent =
+        formatDate(date);
+
+    summaryTime.textContent =
+        time;
+
+    summaryFood.textContent =
+        food;
+
+    summaryDrink.textContent =
+        drink;
+
+
+    finalCard.classList.add("show");
+
+    confirmBtn.textContent =
+        "დადასტურებულია ♡";
+
+    confirmBtn.disabled =
+        true;
+
+    confirmBtn.style.opacity =
+        ".65";
+
+
+    createHeartBurst();
+
+
+    setTimeout(() => {
+
+        finalCard.scrollIntoView({
+            behavior:"smooth",
+            block:"center"
+        });
+
+    },300);
+
+});
+
+
+/* =========================================================
+   HEARTS
+========================================================= */
+
+function createHeart(){
+
+    const heart =
+        document.createElement("div");
+
+    heart.className =
+        "heart";
+
+    heart.textContent =
+        "♡";
+
+    heart.style.left =
+        Math.random() * 100 + "%";
+
+    heart.style.setProperty(
+        "--x",
+        ((Math.random()*160)-80)+"px"
+    );
+
+    heart.style.animationDuration =
+        (4 + Math.random()*3) + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    },7000);
+
+}
+
+setInterval(() => {
+
+    if(Math.random() > .35){
+        createHeart();
+    }
+
+},2500);
+
+
+/* =========================================================
+   HEART BURST
+========================================================= */
+
+function createHeartBurst(){
+
+    for(let i=0;i<18;i++){
+
+        setTimeout(() => {
+
+            const heart =
+                document.createElement("div");
+
+            heart.className =
+                "heart";
+
+            heart.textContent =
+                "♡";
+
+            heart.style.left =
+                (45 + Math.random()*10) + "%";
+
+            heart.style.bottom =
+                "25vh";
+
+            heart.style.setProperty(
+                "--x",
+                ((Math.random()*300)-150)+"px"
+            );
+
+            heart.style.animationDuration =
+                (2.5 + Math.random()*2) + "s";
+
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            },5000);
+
+        },i*70);
+
+    }
+
+}
+
+
+/* =========================================================
+   SCROLL REVEAL
+========================================================= */
+
+const reveal =
+    document.querySelectorAll(
+        ".message,.choice-title,.choice-group,.confirm-title"
+    );
+
+const observer =
+    new IntersectionObserver(
+        entries => {
+
+            entries.forEach(entry => {
+
+                if(entry.isIntersecting){
+
+                    entry.target.style.animation =
+                        "fadeUp .8s ease both";
+
+                    observer.unobserve(
+                        entry.target
+                    );
+
+                }
+
+            });
+
+        },
+        {
+            threshold:.12
+        }
+    );
+
+reveal.forEach(el => {
+    observer.observe(el);
+});
+
+</script>
+
+</body>
+</html>
